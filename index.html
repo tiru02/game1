@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Rock-Paper-Scissors</title>
+	<style>
+	*{
+	margin: 0;
+	padding: 0;
+	}
+	body{
+        display: grid;
+        place-items: center;
+        width: 100vw;
+        height: 100vh;
+    }
+    .name{
+        font-size: 2rem;
+        color: skyblue;
+        font-weight: 900;
+    }
+    .game{
+        width: 320px;
+        height: 400px;
+        text-align: center;
+    }
+    .score{
+        font-size: 2rem;
+        color: greenyellow;
+        margin: 10px;
+    }
+    .robot{
+        font-size: 2rem;
+        color: red;
+        margin: 10px;
+    }
+    input[type="button"]{
+        width: 70px;
+        height: 70px;
+        border-radius:50%;
+        font-size: 2rem;
+        transition: scale .2s ease;
+        background: #111;
+        margin: 10px;
+        &:active{
+            scale: .9;
+        }
+    }
+    .status{
+        font-size: 2rem;
+        color: yellow;
+        font-weight: 900;
+        text-transform: capitalize;
+        margin: 10px;
+    }
+    input[res]{
+        width: 50px;
+        height: 50px;
+        border-radius: 0;
+        border: none;
+        outline: none;
+        &:active{
+            scale: unset;
+        }
+    }
+	@media (prefers-color-scheme: dark){
+    body{
+        background-color: #000;
+        color: #fff;
+	}
+	}
+</style>
+</head>
+<body>
+    <div class="game">
+        <h2 class="name">Rock-Papers-Scissors</h2>
+        <form action="/">
+            <div class="score">🫠<span id="ue"><input type="button" value="🤚🏼" res></span><br>Score: <span id="score">0</span></div>
+            <div class="robot">🤖 <span id="robot"><input type="button" value="🤚🏼" res></span><br>Score:<span id="rScore">0</span></div>
+            <input type="button" value="✊🏼" onclick="clickx(0)">
+            <input type="button" value="🤚🏼" onclick="clickx(1)">
+            <input type="button" value="✌🏼" onclick="clickx(2)">
+            <div class="status">Start</div>
+        </form>
+    </div>
+    <script>
+    let emoji={
+      0:'✊🏼',
+      1:'🤚🏼',
+      2:'✌🏼'
+    },score=0,rscore=0
+    let userEj=document.querySelector('#ue')
+    let roboEj=document.querySelector('#robot')
+    let status=document.querySelector('.status'),
+      uscore=document.querySelector('#score'),
+      cscore=document.querySelector('#rScore')
+    function clickx(value){
+      userEj.innerHTML=`<input type="button" value="${emoji[value]}" res>`
+      let x=Math.round(Math.random()*2)
+      roboEj.innerHTML=`<input type="button" value="${emoji[x]}" res>`
+      if(value==x){
+        status.innerText='draw'
+      }
+      if(value==0 & x==1){
+        status.innerText='lost'
+        rscore+=1
+        cscore.innerText=rscore
+      }else if(value == 0 & x==2){
+        status.innerText='win'
+        score+=1
+        uscore.innerText=score
+      }else if(value==1 & x==0){
+        status.innerText='win'
+        score+=1
+        uscore.innerText=score
+      }else if(value==1 & x==2){
+        status.innerText='lost'
+        rscore+=1
+        cscore.innerText=rscore
+      }else if(value==2 & x==0){
+        status.innerText='lost'
+        rscore+=1
+        cscore.innerText=rscore
+      }else if(value==2 & x==1){
+        status.innerText='win'
+        score+=1
+        uscore.innerText=score
+      }
+      // if x==value:
+      // status.innerText='draw'
+    }
+    </script>
+</body>
+</html>
